@@ -91,9 +91,18 @@ class EditRestaurantViewController: UIViewController, UINavigationControllerDele
       data["photoURL"] = downloadUrl
     }
 
-
-    // TODO: Update the restaurant document in Cloud Firestore
-  }
+    
+    Firestore.firestore()
+        .collection("restaurants")
+        .document(restaurant.documentID)
+        .updateData(data) { error in
+            if let error = error {
+                print("Error writing document: \(error)")
+            } else {
+                self.presentDidSaveAlert()
+            }
+    }
+    }
 
   // MARK: Setting up pickers
   private let priceOptions = ["$", "$$", "$$$"]
