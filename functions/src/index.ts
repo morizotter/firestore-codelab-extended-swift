@@ -32,8 +32,8 @@ export const computeAverageReview = functions.firestore
     if (prev.exists) {
       previousValue = prev.data();
       const prevRating = previousValue.rating;
-      if (rating == prevRating) {
-        console.log("not a new ragin.");
+      if (rating === prevRating) {
+        console.log("not a new rating.");
         return null;
       }
     }
