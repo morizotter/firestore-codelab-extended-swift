@@ -29,7 +29,6 @@
 		8D9BBC381EE2200900194E9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D9BBC371EE2200900194E9A /* Assets.xcassets */; };
 		8D9BBC3B1EE2200900194E9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D9BBC391EE2200900194E9A /* LaunchScreen.storyboard */; };
 		8D9BBC461EE2200900194E9A /* FriendlyEatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BBC451EE2200900194E9A /* FriendlyEatsTests.swift */; };
-		8DCC05D12245C0FF002151C9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8DCC05D02245C0FF002151C9 /* GoogleService-Info.plist */; };
 		8DDCD36220325B8F00CFBF60 /* MyRestaurantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDCD36120325B8F00CFBF60 /* MyRestaurantsViewController.swift */; };
 		8DDCD364203261A500CFBF60 /* RestaurantTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDCD363203261A500CFBF60 /* RestaurantTableViewDataSource.swift */; };
 		8DDCD366203277CA00CFBF60 /* AddRestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDCD365203277CA00CFBF60 /* AddRestaurantViewController.swift */; };
@@ -37,6 +36,8 @@
 		8DF1E3151EE72C4600192CDE /* LocalCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF1E3141EE72C4600192CDE /* LocalCollection.swift */; };
 		8DF77E1A1EEB45E500CB2330 /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF77E191EEB45E500CB2330 /* RestaurantDetailViewController.swift */; };
 		8DF77E1C1EEB645100CB2330 /* StarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF77E1B1EEB645100CB2330 /* StarsView.swift */; };
+		9038BEE3230FE85D00B29090 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9038BEE2230FE85D00B29090 /* GoogleService-Info.plist */; };
+		905A75F62312F5700000D90C /* LazyRestaurantTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905A75F52312F5700000D90C /* LazyRestaurantTableViewDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,7 +80,6 @@
 		8D9BBC411EE2200900194E9A /* FriendlyEatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FriendlyEatsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9BBC451EE2200900194E9A /* FriendlyEatsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendlyEatsTests.swift; sourceTree = "<group>"; };
 		8D9BBC471EE2200900194E9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8DCC05D02245C0FF002151C9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8DDCD36120325B8F00CFBF60 /* MyRestaurantsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRestaurantsViewController.swift; sourceTree = "<group>"; };
 		8DDCD363203261A500CFBF60 /* RestaurantTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewDataSource.swift; sourceTree = "<group>"; };
 		8DDCD365203277CA00CFBF60 /* AddRestaurantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRestaurantViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +87,8 @@
 		8DF1E3141EE72C4600192CDE /* LocalCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalCollection.swift; sourceTree = "<group>"; };
 		8DF77E191EEB45E500CB2330 /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
 		8DF77E1B1EEB645100CB2330 /* StarsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarsView.swift; sourceTree = "<group>"; };
+		9038BEE2230FE85D00B29090 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		905A75F52312F5700000D90C /* LazyRestaurantTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyRestaurantTableViewDataSource.swift; sourceTree = "<group>"; };
 		9E225A2DA1F5AE20A9218112 /* Pods-FriendlyEats.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FriendlyEats.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FriendlyEats/Pods-FriendlyEats.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,6 +157,7 @@
 				8DDCD363203261A500CFBF60 /* RestaurantTableViewDataSource.swift */,
 				496B6099203363A9005AD625 /* ReviewTableViewCell.swift */,
 				499D896F203CD176009C067E /* Utils.swift */,
+				905A75F52312F5700000D90C /* LazyRestaurantTableViewDataSource.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 		8D9BBC2F1EE2200900194E9A /* FriendlyEats */ = {
 			isa = PBXGroup;
 			children = (
+				9038BEE2230FE85D00B29090 /* GoogleService-Info.plist */,
 				8D9BBC301EE2200900194E9A /* AppDelegate.swift */,
 				8D6014FA202B8B0F003E8091 /* Profile */,
 				8D6014F7202B8A7F003E8091 /* Restaurants */,
@@ -201,7 +205,6 @@
 				8D9BBC371EE2200900194E9A /* Assets.xcassets */,
 				8D9BBC391EE2200900194E9A /* LaunchScreen.storyboard */,
 				8D9BBC3C1EE2200900194E9A /* Info.plist */,
-				8DCC05D02245C0FF002151C9 /* GoogleService-Info.plist */,
 			);
 			path = FriendlyEats;
 			sourceTree = "<group>";
@@ -317,8 +320,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D9BBC3B1EE2200900194E9A /* LaunchScreen.storyboard in Resources */,
+				9038BEE3230FE85D00B29090 /* GoogleService-Info.plist in Resources */,
 				8D9BBC381EE2200900194E9A /* Assets.xcassets in Resources */,
-				8DCC05D12245C0FF002151C9 /* GoogleService-Info.plist in Resources */,
 				8D9BBC361EE2200900194E9A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -445,6 +448,7 @@
 				8D6014FC202B8B23003E8091 /* ProfileViewController.swift in Sources */,
 				8D5DF7021F7EF3BA00B0D24F /* NewReviewViewController.swift in Sources */,
 				8DDCD366203277CA00CFBF60 /* AddRestaurantViewController.swift in Sources */,
+				905A75F62312F5700000D90C /* LazyRestaurantTableViewDataSource.swift in Sources */,
 				49C24867202A237000D6008A /* HackPageViewController.swift in Sources */,
 				8DF1E3131EE5CFF900192CDE /* Restaurant.swift in Sources */,
 				8DF77E1A1EEB45E500CB2330 /* RestaurantDetailViewController.swift in Sources */,
@@ -619,7 +623,7 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = FriendlyEats/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FriendlyEats;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.molabo.firebase-try-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -633,7 +637,7 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = FriendlyEats/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FriendlyEats;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.molabo.firebase-try-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};

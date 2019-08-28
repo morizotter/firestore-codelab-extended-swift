@@ -19,70 +19,80 @@ import FirebaseFirestore
 import FirebaseAuth
 
 class NewReviewViewController: UIViewController, UITextFieldDelegate {
-
-  static func fromStoryboard(_ storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil),
-                             forRestaurant restaurant: Restaurant) -> NewReviewViewController {
-    let controller = storyboard.instantiateViewController(withIdentifier: "NewReviewViewController") as! NewReviewViewController
-    controller.restaurant = restaurant
-    return controller
-  }
-
-  /// The restaurant being reviewed. This must be set when the controller is created.
-  private var restaurant: Restaurant!
-
-  @IBOutlet var doneButton: UIBarButtonItem!
-
-  @IBOutlet var ratingView: RatingView! {
-    didSet {
-      ratingView.addTarget(self, action: #selector(ratingDidChange(_:)), for: .valueChanged)
+    
+    static func fromStoryboard(_ storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil),
+                               forRestaurant restaurant: Restaurant) -> NewReviewViewController {
+        let controller = storyboard.instantiateViewController(withIdentifier: "NewReviewViewController") as! NewReviewViewController
+        controller.restaurant = restaurant
+        return controller
     }
-  }
-
-  @IBOutlet var reviewTextField: UITextField! {
-    didSet {
-      reviewTextField.addTarget(self, action: #selector(textFieldTextDidChange(_:)), for: .editingChanged)
+    
+    /// The restaurant being reviewed. This must be set when the controller is created.
+    private var restaurant: Restaurant!
+    
+    @IBOutlet var doneButton: UIBarButtonItem!
+    
+    @IBOutlet var ratingView: RatingView! {
+        didSet {
+            ratingView.addTarget(self, action: #selector(ratingDidChange(_:)), for: .valueChanged)
+        }
     }
-  }
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    doneButton.isEnabled = false
-    reviewTextField.delegate = self
-  }
-
-  @IBAction func cancelButtonPressed(_ sender: Any) {
-    self.navigationController?.popViewController(animated: true)
-  }
-
-  @IBAction func doneButtonPressed(_ sender: Any) {
-    // TODO: handle user not logged in.
-    guard let user = Auth.auth().currentUser.flatMap(User.init) else { return }
-    let review = Review(restaurantID: restaurant.documentID,
-                        restaurantName: restaurant.name,
-                        rating: ratingView.rating!,
-                        userInfo: user,
-                        text: reviewTextField.text!,
-                        date: Date(),
-                        yumCount: 0)
-
-    // TODO: Write the review to Firestore.
-  }
-
-  @objc func ratingDidChange(_ sender: Any) {
-    updateSubmitButton()
-  }
-
-  func textFieldIsEmpty() -> Bool {
-    guard let text = reviewTextField.text else { return true }
-    return text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-  }
-
-  func updateSubmitButton() {
-    doneButton.isEnabled = (ratingView.rating != nil && !textFieldIsEmpty())
-  }
-
-  @objc func textFieldTextDidChange(_ sender: Any) {
-    updateSubmitButton()
-  }
-
+    
+    @IBOutlet var reviewTextField: UITextField! {
+        didSet {
+            reviewTextField.addTarget(self, action: #selector(textFieldTextDidChange(_:)), for: .editingChanged)
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        doneButton.isEnabled = false
+        reviewTextField.delegate = self
+    }
+    
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func doneButtonPressed(_ sender: Any) {
+        // TODO: handle user not logged in.
+        guard let user = Auth.auth().currentUser.flatMap(User.init) else { return }
+        let review = Review(restaurantID: restaurant.documentID,
+                            restaurantName: restaurant.name,
+                            rating: ratingView.rating!,
+                            userInfo: user,
+                            text: reviewTextField.text!,
+                            date: Date(),
+                            yumCount: 0)
+        
+        Firestore.firestore().collection("reviews").document(review.documentID)
+            .setData(review.documentData) { error in
+                if let error = error {
+                    print("Error writing new review: \(error)")
+                } else {
+                    print("Write confirmed by the server!")
+                }
+        }
+        if self.navigationController?.topViewController == self {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    @objc func ratingDidChange(_ sender: Any) {
+        updateSubmitButton()
+    }
+    
+    func textFieldIsEmpty() -> Bool {
+        guard let text = reviewTextField.text else { return true }
+        return text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+    
+    func updateSubmitButton() {
+        doneButton.isEnabled = (ratingView.rating != nil && !textFieldIsEmpty())
+    }
+    
+    @objc func textFieldTextDidChange(_ sender: Any) {
+        updateSubmitButton()
+    }
+    
 }
