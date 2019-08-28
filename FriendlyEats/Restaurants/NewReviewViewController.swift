@@ -70,11 +70,11 @@ class NewReviewViewController: UIViewController, UITextFieldDelegate {
                 if let error = error {
                     print("Error writing new review: \(error)")
                 } else {
-                    // Pop the review controller on success
-                    if self.navigationController?.topViewController == self {
-                        self.navigationController?.popViewController(animated: true)
-                    }
+                    print("Write confirmed by the server!")
                 }
+        }
+        if self.navigationController?.topViewController == self {
+            self.navigationController?.popViewController(animated: true)
         }
     }
     
