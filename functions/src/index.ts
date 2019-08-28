@@ -87,6 +87,35 @@ async function updateAverage(
   return transactionResult;
 }
 
+export const updateRest = functions.firestore.document('restaurants/{restaurantID}').onUpdate((change, context) => {
+  const eventData = change.after.data();
+  const restaurantID = context.params.restaurantID;
+  const prevEventData = change.before.data();
+  const name = eventData.name;
+  const oldName = prevEventData.name;
+  if (oldName === name) {
+    console.log("change wa snot in name. No need to update reviews.")
+    return null;
+  }
+  const db = app.firestore();
+  // if name was updated
+  return updateRestaurant(db, restaurantID, name);
+}) 
+
+// update changes to restaurant
+async function updateRestaurant(db: Firestore, restaurantID: string, name: string) {
+  const updateRef = db.collection('reviews')
+  // query a list of reviews of the restaurant
+  const queryRef = updateRef.where('restaurantID', '==', restaurantID);
+  const batch = db.batch();
+  const reviewsSnapshot = await queryRef.get();
+  for (const doc of reviewsSnapshot.docs) {
+    await batch.update(doc.ref, {restaurantName: name});
+  };
+  await batch.commit();
+  console.log(`name of restaurant updated to ${name}`);
+}
+
 // TODO(DEVELOPER): Write the computeAverageReview Function here.
 
 // TODO(DEVELOPER): Add updateAverage helper function here.
