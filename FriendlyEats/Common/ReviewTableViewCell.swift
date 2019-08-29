@@ -53,48 +53,18 @@ class ReviewTableViewCell: UITableViewCell {
     }
     
     @IBAction func yumWasTapped(_ sender: Any) {
-        let reviewReference = Firestore.firestore().collection("reviews").document(review.documentID)
-        Firestore.firestore().runTransaction({ (transaction, errorPointer) -> Any? in
-            // Make sure we have the most up-to-date number of yums
-            let reviewSnapshot: DocumentSnapshot
-            do {
-                reviewSnapshot = try transaction.getDocument(reviewReference)
-            } catch let error as NSError {
-                errorPointer?.pointee = error
-                return nil
-            }
-            
-            // We can convert our snapshot to a review object
-            guard let latestReview = Review(document: reviewSnapshot) else {
-                let error = NSError(domain: "FriendlyEatsErrorDomain", code: 0, userInfo: [NSLocalizedDescriptionKey: "Review at \(reviewReference.path) didn't look lik a valid review"])
-                errorPointer?.pointee = error
-                return nil
-            }
-            
-            guard let currentUser = Auth.auth().currentUser else {
-                let error = NSError(domain: "FriendlyEatsErrorDomain", code: 0, userInfo: [
-                    NSLocalizedDescriptionKey: "You need to be signed in to Yum a review"
-                    ])
-                errorPointer?.pointee = error
-                return nil
-            }
-            
-            // Finally, we can update the "Yum" count
-            let newYumCount = latestReview.yumCount + 1
-            
-            // Next we are goint to write a simple "Yum" object into our subcollection...
-            let newYum = Yum(documentID: currentUser.uid, username: currentUser.displayName ?? "Unknown user")
-            let newYumReference = reviewReference.collection("yums").document(newYum.documentID)
-            transaction.setData(newYum.documentData, forDocument: newYumReference)
-            transaction.updateData(["yumCount": newYumCount], forDocument: reviewReference)
-            return nil
-        }) { (_, error) in
-            if let error = error  {
-                print("Got an error attempting the transaction: \(error)")
-            } else {
-                print("Transatcion successful!")
-            }
+        guard let currentUser = Auth.auth().currentUser else {
+            print("You need to be signed in to Yum a review!")
+            return
         }
+        let pendingYum = ["review": review.documentID,
+                          "userID": currentUser.uid,
+                          "userName": currentUser.displayName ?? "Anonymous"]
+        Firestore.firestore().collection("pendingYums").addDocument(data: pendingYum)
+
+        // We can "fake" the data if we're offline.
+        review.yumCount += 1
+        showYumText()
     }
     
 }
